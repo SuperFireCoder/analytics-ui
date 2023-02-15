@@ -30,11 +30,13 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <GlobalLoader />
   </q-layout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import GlobalLoader from 'src/components/GlobalLoader.vue';
 import EssentialLink, {
   EssentialLinkProps,
 } from 'components/EssentialLink.vue';

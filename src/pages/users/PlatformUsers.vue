@@ -1,82 +1,32 @@
 <template>
   <div class="q-pa-md">
-    <q-table
-      :loading="isUsersLoading"
-      title="Platform Users"
-      :rows="allUsers"
-      :columns="columns"
-      row-key="name"
-      :rows-per-page-options="[10, 40, 100, 0]"
+    <q-tabs
+      v-model="currentTab"
+      dense
+      class="text-grey"
+      active-color="primary"
+      indicator-color="primary"
+      align="justify"
+      narrow-indicator
     >
-    </q-table>
+      <q-tab name="charts" label="Overview" />
+      <q-tab name="allUsers" label="Platform Users" />
+    </q-tabs>
+
+    <q-separator />
+    <q-tab-panels v-model="currentTab" animated>
+      <q-tab-panel name="charts"><OverviewCharts /> </q-tab-panel>
+      <q-tab-panel name="allUsers"><UserList /> </q-tab-panel>
+    </q-tab-panels>
   </div>
 </template>
 
 <script setup lang="ts">
-import { QTableProps } from 'quasar';
-import IUsers from 'src/interfaces/IUser';
+import OverviewCharts from 'src/components/users/OverviewCharts.vue';
+import UserList from 'src/components/users/UserList.vue';
 import Users from 'src/models/Users';
-import { reactive, ref } from 'vue';
-
-const columns: QTableProps['columns'] = [
-  {
-    name: 'id',
-    align: 'center',
-    label: 'Keycloak ID',
-    field: 'id',
-    sortable: true,
-  },
-  // {
-  //   name: 'username',
-  //   align: 'center',
-  //   label: 'Username',
-  //   field: 'username',
-  //   sortable: false,
-  // },
-  {
-    name: 'firstName',
-    align: 'center',
-    label: 'First Name',
-    field: 'firstName',
-    sortable: true,
-  },
-  {
-    name: 'lastName',
-    align: 'center',
-    label: 'Last Name',
-    field: 'lastName',
-    sortable: true,
-  },
-  {
-    name: 'email',
-    align: 'center',
-    label: 'Email',
-    field: 'email',
-    sortable: false,
-  },
-  {
-    name: 'providers',
-    align: 'center',
-    label: 'Providers',
-    field: 'providers',
-    sortable: true,
-  },
-  {
-    name: 'created',
-    align: 'center',
-    label: 'Date Joined',
-    field: 'created',
-    sortable: true,
-  },
-];
-
-let isUsersLoading = ref(true);
-let allUsers: IUsers[] = reactive([]);
-Users.getAllUsers()
-  .then((response) => {
-    Object.assign(allUsers, response);
-  })
-  .finally(() => {
-    isUsersLoading.value = false;
-  });
+import { ref } from 'vue';
+let currentTab = ref('charts');
+// Fetch the data from the backend
+Users.getAllUsers();
 </script>

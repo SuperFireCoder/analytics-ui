@@ -1,32 +1,61 @@
 <template>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Line
+    ref="chart"
+    v-if="newUserTrend.isReady"
+    id="my-chart-id"
+    :options="chartOptions"
+    :data="chartData"
+  />
+  <q-card v-else flat class="q-pa-lg">
+    <q-skeleton height="200px" square />
+  </q-card>
 </template>
 
 <script setup lang="ts">
-import { Bar } from 'vue-chartjs';
+import { Line } from 'vue-chartjs';
+
 import {
   Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
   CategoryScale,
   LinearScale,
-} from 'chart.js';
-
-ChartJS.register(
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
-  BarElement,
+} from 'chart.js';
+import { useUsersStore } from 'src/stores/users-store';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+ChartJS.register(
   CategoryScale,
-  LinearScale
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
 );
+
+const chart = ref();
+
+const userStore = useUsersStore();
+const { newUserTrend } = storeToRefs(userStore);
+console.log(newUserTrend.value);
+
 let chartData = {
-  labels: ['January', 'February', 'March'],
-  datasets: [{ data: [40, 20, 12] }],
+  labels: newUserTrend.value.labels,
+  datasets: [
+    {
+      label: 'New Users',
+      backgroundColor: '#f87979',
+      data: newUserTrend.value.data,
+    },
+  ],
 };
-let chartOptions: {
-  responsive: true;
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
 };
 </script>

@@ -25,8 +25,21 @@
 import OverviewCharts from 'src/components/users/OverviewCharts.vue';
 import UserList from 'src/components/users/UserList.vue';
 import Users from 'src/models/Users';
+import { useGlobalStore } from 'src/stores/global-store';
 import { ref } from 'vue';
 let currentTab = ref('charts');
 // Fetch the data from the backend
-Users.getAllUsers();
+const store = useGlobalStore();
+store.setLoaderStatus({
+  isLoading: true,
+  text: 'Loading EcoCommons Data',
+});
+const user = new Users();
+//Wait for all promises to complete before closing the dialog
+Promise.all([user.getAllUsers(), user.getNewUserTrendData()]).finally(() => {
+  store.setLoaderStatus({
+    isLoading: false,
+    text: 'Loading EcoCommons users',
+  });
+});
 </script>

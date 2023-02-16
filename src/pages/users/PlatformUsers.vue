@@ -14,7 +14,7 @@
     </q-tabs>
 
     <q-separator />
-    <q-tab-panels v-model="currentTab" animated>
+    <q-tab-panels v-model="currentTab" animated v-if="isDataLoaded">
       <q-tab-panel name="charts"><OverviewCharts /> </q-tab-panel>
       <q-tab-panel name="allUsers"><UserList /> </q-tab-panel>
     </q-tab-panels>
@@ -35,8 +35,10 @@ store.setLoaderStatus({
   text: 'Loading EcoCommons Data',
 });
 const user = new Users();
+const isDataLoaded = ref(false);
 //Wait for all promises to complete before closing the dialog
 Promise.all([user.getAllUsers(), user.getNewUserTrendData()]).finally(() => {
+  isDataLoaded.value = true;
   store.setLoaderStatus({
     isLoading: false,
     text: 'Loading EcoCommons users',

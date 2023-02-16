@@ -1,61 +1,124 @@
 <template>
-  <Line
-    ref="chart"
-    v-if="newUserTrend.isReady"
-    id="my-chart-id"
-    :options="chartOptions"
-    :data="chartData"
-  />
-  <q-card v-else flat class="q-pa-lg">
+  <v-chart class="chart" :option="option" autoresize />
+  <!-- <q-card v-else flat class="q-pa-lg">
     <q-skeleton height="200px" square />
-  </q-card>
+  </q-card> -->
 </template>
 
 <script setup lang="ts">
-import { Line } from 'vue-chartjs';
-
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
 import { useUsersStore } from 'src/stores/users-store';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { ref, computed } from 'vue';
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LineChart } from 'echarts/charts';
+import VChart from 'vue-echarts';
 
-const chart = ref();
+import {
+  TitleComponent,
+  TooltipComponent,
+  LegendComponent,
+  GraphicComponent,
+  GridComponent,
+  DataZoomComponent,
+  ToolboxComponent,
+} from 'echarts/components';
+
+use([
+  ToolboxComponent,
+  DataZoomComponent,
+  CanvasRenderer,
+  LineChart,
+  TitleComponent,
+  TooltipComponent,
+  LegendComponent,
+  GraphicComponent,
+  GridComponent,
+]);
 
 const userStore = useUsersStore();
 const { newUserTrend } = storeToRefs(userStore);
-console.log(newUserTrend.value);
+/* Wanted this calc for backend but pandas is not behaving. */
+const growthOverTime = computed((): number[] => {
+  let data: number[] = [];
+  let total = 0;
+  newUserTrend.value.data.forEach((item) => {
+    total += item;
+    data.push(total);
+  });
+  return data;
+});
+const option = ref({
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#6a7985',
+      },
+    },
+  },
+  legend: {
+    data: ['New Users', 'User Growth'],
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {},
+    },
+  },
 
-let chartData = {
-  labels: newUserTrend.value.labels,
-  datasets: [
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: newUserTrend.value.labels,
+  },
+  yAxis: {
+    type: 'value',
+  },
+  dataZoom: [
     {
-      label: 'New Users',
-      backgroundColor: '#f87979',
-      data: newUserTrend.value.data,
+      type: 'inside',
+      start: 0,
+      end: 50,
+    },
+    {
+      start: 0,
+      end: 100,
     },
   ],
-};
-
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-};
+  series: [
+    {
+      name: 'New Users',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series',
+      },
+      // itemStyle: {
+      //   color: 'rgb(255, 70, 131)',
+      // },
+      // areaStyle: {
+      //   color: 'rgb(243, 243, 243)',
+      // },
+      data: newUserTrend.value.data,
+    },
+    {
+      name: 'User Growth',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series',
+      },
+      // itemStyle: {
+      //   color: 'rgb(255, 70, 131)',
+      // },
+      // areaStyle: {
+      //   color: 'rgb(243, 243, 243)',
+      // },
+      data: growthOverTime,
+    },
+  ],
+});
 </script>

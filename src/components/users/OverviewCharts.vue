@@ -1,8 +1,6 @@
 <template>
   <div class="row items-align-center">
-    <div class="col"><UserSubscriptionTrend /></div>
-
-    <div class="col"><UserType /></div>
+    <div class="col" style="height: 50vh"><UserSubscriptionTrend /></div>
   </div>
   <div class="row">
     <div class="col"></div>
@@ -10,5 +8,4 @@
 </template>
 <script setup lang="ts">
 import UserSubscriptionTrend from './charts/UserSubscriptionTrend.vue';
-import UserType from './charts/UserType.vue';
 </script>

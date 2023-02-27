@@ -1,8 +1,5 @@
 <template>
   <v-chart class="chart" :option="option" autoresize />
-  <!-- <q-card v-else flat class="q-pa-lg">
-    <q-skeleton height="200px" square />
-  </q-card> -->
 </template>
 
 <script setup lang="ts">
@@ -62,8 +59,12 @@ const option = ref({
     data: ['New Users', 'User Growth'],
   },
   toolbox: {
+    show: true,
     feature: {
-      saveAsImage: {},
+      mark: { show: true },
+      dataView: { show: true, readOnly: false },
+      restore: { show: true },
+      saveAsImage: { show: true },
     },
   },
 
@@ -78,12 +79,14 @@ const option = ref({
   dataZoom: [
     {
       type: 'inside',
-      start: 0,
-      end: 50,
+      xAxisIndex: 0,
+      minSpan: 5,
     },
     {
-      start: 0,
-      end: 100,
+      type: 'slider',
+      xAxisIndex: 0,
+      minSpan: 5,
+      bottom: 20,
     },
   ],
   series: [

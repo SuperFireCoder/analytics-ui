@@ -15,14 +15,14 @@
 
     <q-separator />
     <q-tab-panels v-model="currentTab" animated v-if="isDataLoaded">
-      <q-tab-panel name="charts"><OverviewCharts /> </q-tab-panel>
+      <q-tab-panel name="charts"><UserOverview /> </q-tab-panel>
       <q-tab-panel name="allUsers"><UserList /> </q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
 
 <script setup lang="ts">
-import OverviewCharts from 'src/components/users/OverviewCharts.vue';
+import UserOverview from 'src/components/users/overview/UserOverview.vue';
 import UserList from 'src/components/users/UserList.vue';
 import Users from 'src/models/Users';
 import { useGlobalStore } from 'src/stores/global-store';

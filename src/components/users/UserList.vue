@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col">
       <q-table
+        flat
+        bordered
+        class="my-sticky-header-table"
         title="Platform Users"
         :rows="allUsers"
         :columns="columns"

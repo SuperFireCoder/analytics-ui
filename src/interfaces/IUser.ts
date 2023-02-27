@@ -5,5 +5,16 @@ export default interface IUsers {
   lastName: string;
   email: string;
   provider?: string;
+  orginizationName: string;
+  orginizationSector: string;
   created: Date;
+}
+export interface UserDataBySector {
+  orginizationSector: string;
+  name: string;
+  value: number;
+}
+export interface AllUserResponse {
+  users: IUsers[];
+  userGrouped: UserDataBySector[];
 }

@@ -1,6 +1,4 @@
-import { NewUsersTrend } from './../interfaces/ICharts';
 import { useUsersStore } from './../stores/users-store';
-import { useGlobalStore } from './../stores/global-store';
 import IUsers from 'src/interfaces/IUser';
 import { api } from 'src/boot/axios';
 
@@ -12,7 +10,8 @@ export default class Users implements IUsers {
   email: string;
   provider?: string | undefined;
   created: Date;
-
+  orginizationName: string;
+  orginizationSector: string;
   userStore = useUsersStore();
   //Load global status store for showing loading status
 
@@ -25,6 +24,8 @@ export default class Users implements IUsers {
       this.email = user.email;
       this.created = user.created;
       this.provider = user.provider;
+      this.orginizationName = user.orginizationName;
+      this.orginizationSector = user.orginizationSector;
     } else {
       this.id =
         this.username =
@@ -32,6 +33,8 @@ export default class Users implements IUsers {
         this.lastName =
         this.email =
         this.provider =
+        this.orginizationName =
+        this.orginizationSector =
           '';
       this.created = new Date();
     }

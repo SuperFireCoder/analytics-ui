@@ -12,10 +12,7 @@ import { computed, ref } from 'vue';
 export const useUsersStore = defineStore('UsersStore', () => {
   const _allUsers = ref<IUsers[]>([]);
   const _allUsersByGroups = ref<UserDataBySector[]>([]);
-  const _appActivity = ref<IAppActivity>({
-    clientId: [],
-    count: [],
-  });
+  const _appActivity = ref<IAppActivity[]>([]);
   const _userActivity = ref<ILoginActivity>({
     count: [],
     time: [],

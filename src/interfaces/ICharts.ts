@@ -9,12 +9,12 @@ export interface ILoginActivity {
   time: string[];
 }
 export interface IAppActivity {
-  clientId: string[];
-  count: number[];
+  name: string;
+  value: number;
 }
 
 export interface ITrend {
   signup: NewUsersTrend;
   activity: ILoginActivity;
-  appActivity: IAppActivity;
+  appActivity: IAppActivity[];
 }

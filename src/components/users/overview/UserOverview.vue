@@ -14,11 +14,14 @@
         </q-tab-panel>
 
         <q-tab-panel name="demographics" style="height: 50vh">
-          <UserType />
+          <UserDemographics />
         </q-tab-panel>
 
         <q-tab-panel name="platActivity" style="height: 50vh">
           <PlatformActivity />
+        </q-tab-panel>
+        <q-tab-panel name="appActivity" style="height: 70vh">
+          <ApplicationUsage />
         </q-tab-panel>
       </q-tab-panels>
     </template>
@@ -47,7 +50,8 @@
 import { ref } from 'vue';
 import UserSubscriptionTrend from './UserSubscriptionTrend.vue';
 import PlatformActivity from './PlatformActivity.vue';
-import UserType from './UserType.vue';
+import UserDemographics from './UserDemographics.vue';
+import ApplicationUsage from './ApplicationUsage.vue';
 
 const splitterModel = ref(80);
 const tab = ref('growth');

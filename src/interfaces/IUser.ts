@@ -1,3 +1,5 @@
+import { ISignUpActivity, ILoginActivity, IAppActivity } from './ICharts';
+
 export default interface IUsers {
   id: string;
   username: string;
@@ -9,12 +11,15 @@ export default interface IUsers {
   orginizationSector: string;
   created: Date;
 }
-export interface UserDataBySector {
+export interface IUserDataBySector {
   orginizationSector: string;
   name: string;
   value: number;
 }
-export interface AllUserResponse {
+export interface IUserDataResponse {
   users: IUsers[];
-  userGrouped: UserDataBySector[];
+  userGrouped: IUserDataBySector[];
+  signup: ISignUpActivity;
+  activity: ILoginActivity;
+  appActivity: IAppActivity[];
 }

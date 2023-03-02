@@ -37,7 +37,7 @@ store.setLoaderStatus({
 const user = new Users();
 const isDataLoaded = ref(false);
 //Wait for all promises to complete before closing the dialog
-Promise.all([user.getAllUsers(), user.getNewUserTrendData()]).finally(() => {
+Promise.all([user.getUsersData()]).finally(() => {
   isDataLoaded.value = true;
   store.setLoaderStatus({
     isLoading: false,

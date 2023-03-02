@@ -1,7 +1,6 @@
-export interface NewUsersTrend {
+export interface ISignUpActivity {
   labels: string[];
   data: number[];
-  isReady: boolean;
 }
 
 export interface ILoginActivity {
@@ -11,10 +10,4 @@ export interface ILoginActivity {
 export interface IAppActivity {
   name: string;
   value: number;
-}
-
-export interface ITrend {
-  signup: NewUsersTrend;
-  activity: ILoginActivity;
-  appActivity: IAppActivity[];
 }

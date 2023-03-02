@@ -34,12 +34,12 @@ use([
 ]);
 
 const userStore = useUsersStore();
-const { newUserTrend } = storeToRefs(userStore);
+const { signUpActivity } = storeToRefs(userStore);
 /* Wanted this calc for backend but pandas is not behaving. */
 const growthOverTime = computed((): number[] => {
   let data: number[] = [];
   let total = 0;
-  newUserTrend.value.data.forEach((item) => {
+  signUpActivity.value.data.forEach((item) => {
     total += item;
     data.push(total);
   });
@@ -71,7 +71,7 @@ const option = ref({
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: newUserTrend.value.labels,
+    data: signUpActivity.value.labels,
   },
   yAxis: {
     type: 'value',
@@ -104,7 +104,7 @@ const option = ref({
       // areaStyle: {
       //   color: 'rgb(243, 243, 243)',
       // },
-      data: newUserTrend.value.data,
+      data: signUpActivity.value.data,
     },
     {
       name: 'User Growth',

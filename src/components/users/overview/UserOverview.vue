@@ -10,7 +10,7 @@
         transition-next="jump-up"
       >
         <q-tab-panel name="growth" style="height: 50vh">
-          <UserSubscriptionTrend />
+          <UserSignUpActivity />
         </q-tab-panel>
 
         <q-tab-panel name="demographics" style="height: 50vh">
@@ -48,7 +48,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import UserSubscriptionTrend from './UserSubscriptionTrend.vue';
+import UserSignUpActivity from './UserSignUpActivity.vue';
 import PlatformActivity from './PlatformActivity.vue';
 import UserDemographics from './UserDemographics.vue';
 import ApplicationUsage from './ApplicationUsage.vue';

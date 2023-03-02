@@ -40,16 +40,9 @@ export default class Users implements IUsers {
     }
   }
 
-  getAllUsers = async (): Promise<void> => {
+  getUsersData = async (): Promise<void> => {
     return api.get('/users/all').then((response) => {
       this.userStore.updateData(response.data);
-    });
-  };
-  getNewUserTrendData = async (): Promise<void> => {
-    return api.get('/users/trend').then((response) => {
-      const storeData = response.data;
-      storeData.isReady = true;
-      this.userStore.updateNewUserTrendData(storeData);
     });
   };
 }

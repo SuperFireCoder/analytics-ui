@@ -54,6 +54,9 @@ const option = ref({
     type: 'sunburst',
     data: userGroups,
     radius: [0, '100%'],
+    emphasis: {
+      focus: 'ancestor',
+    },
     label: {
       rotate: 'radial',
     },

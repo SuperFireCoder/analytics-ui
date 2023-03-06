@@ -4,4 +4,5 @@
 
 <script setup lang="ts">
 const url = process.env.ANALYTICS_API_URL;
+
 </script>

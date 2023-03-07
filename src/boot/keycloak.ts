@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import VueKeyCloakJs from '@dsb-norge/vue-keycloak-js';
+import { api } from './axios';
 import {
   VueKeycloakInstance,
   VueKeycloakOptions,
@@ -28,9 +29,17 @@ const options: VueKeycloakOptions = {
   },
   onReady(keycloak: Keycloak) {
     console.log('Keycloak ready', keycloak);
+    api.interceptors.request.use((config) => {
+      if (keycloak.authenticated) {
+        config.headers.Authorization = `Bearer ${keycloak.token}`;
+        return config;
+      }
+    });
   },
 };
 
 export default boot(({ app }) => {
   app.use(VueKeyCloakJs, options);
 });
+
+export { api };

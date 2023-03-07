@@ -1,6 +1,6 @@
 import { useUsersStore } from './../stores/users-store';
 import IUsers from 'src/interfaces/IUser';
-import { api } from 'src/boot/axios';
+import { api } from 'src/boot/keycloak';
 
 export default class Users implements IUsers {
   id: string;

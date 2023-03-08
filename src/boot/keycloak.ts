@@ -38,8 +38,8 @@ const options: VueKeycloakOptions = {
   },
 };
 
-export default boot(({ app }) => {
-  app.use(VueKeyCloakJs, options);
+export default boot(async ({ app }) => {
+  app.use(await VueKeyCloakJs, options);
 });
 
 export { api };

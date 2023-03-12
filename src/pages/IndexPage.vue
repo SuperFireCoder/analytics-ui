@@ -1,5 +1,6 @@
 <template>
-  <q-page class="row items-center justify-evenly">{{ url }} </q-page>
+  <q-page class="row items-center justify-evenly">{{ url }}
+  </q-page>
 </template>
 
 <script setup lang="ts">

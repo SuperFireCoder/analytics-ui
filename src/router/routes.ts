@@ -2,15 +2,42 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/login',
+    component: () => import('layouts/LoginLayout.vue'),
+    meta: {
+      requiresAuth: false,
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('pages/LoginPage.vue'),
+      },
+    ],
+  },
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: '',
+        component: () => import('pages/IndexPage.vue'),
+      },
+    ],
   },
   {
     path: '/users',
     component: () => import('layouts/MainLayout.vue'),
+    meta: {
+      requiresAuth: true,
+    },
     children: [
-      { path: '', component: () => import('pages/users/PlatformUsers.vue') },
+      {
+        path: '',
+        component: () => import('pages/users/PlatformUsers.vue'),
+      },
     ],
   },
 

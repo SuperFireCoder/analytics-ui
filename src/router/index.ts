@@ -1,4 +1,7 @@
+import { storeToRefs } from 'pinia';
 import { route } from 'quasar/wrappers';
+import { useGlobalStore } from 'src/stores/global-store';
+import { ref, watch } from 'vue';
 import {
   createMemoryHistory,
   createRouter,
@@ -20,7 +23,9 @@ import routes from './routes';
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
+    : process.env.VUE_ROUTER_MODE === 'history'
+    ? createWebHistory
+    : createWebHashHistory;
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -30,6 +35,27 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
+  });
+  const store = useGlobalStore();
+  const { isLoggedIn } = storeToRefs(store);
+
+  watch(isLoggedIn, () => {
+    console.log('watch');
+    if (Router.currentRoute.value.path == '/login') Router.push('/');
+  });
+
+  Router.beforeEach((to, from, next) => {
+    console.log(isLoggedIn.value);
+    if (
+      to.matched.some((record) => record.meta.requiresAuth) &&
+      !isLoggedIn.value
+    ) {
+      next('/login');
+    } else if (to.path == '/login' && isLoggedIn.value == true) {
+      next('/');
+    } else {
+      next();
+    }
   });
 
   return Router;

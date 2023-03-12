@@ -2,16 +2,12 @@
   <q-layout view="hHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>Analytics Dashboard </q-toolbar-title>
+        <q-space />
+        <q-btn v-if="!$keycloak.authenticated" outline label="Login" @click="$keycloak.login" />
+        <q-btn v-if="$keycloak.authenticated" outline label="Logout" @click="$keycloak.logoutFn" />
       </q-toolbar>
     </q-header>
 
@@ -19,11 +15,7 @@
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 

@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { route } from 'quasar/wrappers';
 import { useGlobalStore } from 'src/stores/global-store';
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 import {
   createMemoryHistory,
   createRouter,

@@ -37,11 +37,18 @@ const options: VueKeycloakOptions = {
     redirectUri: 'http://localhost:9000/login',
   },
   onReady(keycloak: Keycloak) {
+    store.setKeyCloakReady(true);
     updateTokenInterceptor(keycloak);
+  },
+  onInitSuccess(
+    authenticated: boolean
+    // keycloak?: Keycloak,
+    // VueKeycloak?: VueKeycloakInstance
+  ) {
+    store.setLoginStatus(authenticated);
   },
 };
 const updateTokenInterceptor = (keycloak: Keycloak) => {
-  store.setLoginStatus(keycloak.authenticated);
   api.interceptors.request.use(
     (config) => {
       if (keycloak.authenticated) {
@@ -56,6 +63,7 @@ const updateTokenInterceptor = (keycloak: Keycloak) => {
 };
 
 export default boot(async ({ app }) => {
+  store.setKeyCloakReady(false);
   app.use(await VueKeyCloakJs, options);
   // Handle redirect to login page
 });

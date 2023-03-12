@@ -10,10 +10,14 @@ export const useGlobalStore = defineStore('GlobalStore', () => {
 
   const _isLoggedIn = ref(false);
   const isLoggedIn = computed(() => _isLoggedIn.value);
-
   const setLoginStatus = (state: boolean | undefined) => {
     _isLoggedIn.value = state != undefined ? state : false;
-    // localStorage.setItem('isAuthenticated', state ? 'true' : 'false');
+  };
+  // KC init
+  const _isKeyCloakReady = ref(false);
+  const isKeyCloakReady = computed(() => _isKeyCloakReady.value);
+  const setKeyCloakReady = (state: boolean | undefined) => {
+    _isKeyCloakReady.value = state != undefined ? state : false;
   };
 
   const loader = computed(() => _loader.value);
@@ -24,6 +28,8 @@ export const useGlobalStore = defineStore('GlobalStore', () => {
   return {
     loader,
     isLoggedIn,
+    isKeyCloakReady,
+    setKeyCloakReady,
     setLoaderStatus,
     setLoginStatus,
   };

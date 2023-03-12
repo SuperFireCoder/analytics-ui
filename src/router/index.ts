@@ -37,16 +37,15 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
   const store = useGlobalStore();
-  const { isLoggedIn } = storeToRefs(store);
+  const { isLoggedIn, isKeyCloakReady } = storeToRefs(store);
 
   watch(isLoggedIn, () => {
-    console.log('watch');
     if (Router.currentRoute.value.path == '/login') Router.push('/');
   });
 
   Router.beforeEach((to, from, next) => {
-    console.log(isLoggedIn.value);
     if (
+      isKeyCloakReady.value && //dont redirect to login page if KC is still booting up
       to.matched.some((record) => record.meta.requiresAuth) &&
       !isLoggedIn.value
     ) {

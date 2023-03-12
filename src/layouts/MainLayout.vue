@@ -12,8 +12,7 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+      <q-list class="q-pt-md">
 
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
@@ -34,30 +33,30 @@ import EssentialLink, {
 } from 'components/EssentialLink.vue';
 
 const essentialLinks: EssentialLinkProps[] = [
-  {
-    title: 'Overview',
-    caption: 'Overview of the platform with important metrics',
-    icon: 'fas fa-home',
-    link: 'https://quasar.dev',
-  },
+  // {
+  //   title: 'Overview',
+  //   caption: 'Overview of the platform with important metrics',
+  //   icon: 'fas fa-home',
+  //   link: 'https://quasar.dev',
+  // },
   {
     title: 'Users',
     caption: 'Analytics regarding users of the platform',
     icon: 'fas fa-users',
     link: 'users',
   },
-  {
-    title: 'Experiments',
-    caption: 'Detailed usage analytics for experiments',
-    icon: 'fas fa-flask',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Algorithm',
-    caption: 'Detailed usage analytics for algorithms',
-    icon: 'fas fa-code',
-    link: 'https://forum.quasar.dev',
-  },
+  // {
+  //   title: 'Experiments',
+  //   caption: 'Detailed usage analytics for experiments',
+  //   icon: 'fas fa-flask',
+  //   link: 'https://chat.quasar.dev',
+  // },
+  // {
+  //   title: 'Algorithm',
+  //   caption: 'Detailed usage analytics for algorithms',
+  //   icon: 'fas fa-code',
+  //   link: 'https://forum.quasar.dev',
+  // },
 ];
 
 const leftDrawerOpen = ref(false);

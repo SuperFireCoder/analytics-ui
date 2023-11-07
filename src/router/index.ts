@@ -44,8 +44,8 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach((to, from, next) => {
+    console.log(isKeyCloakReady.value);
     if (
-      isKeyCloakReady.value && //dont redirect to login page if KC is still booting up
       to.matched.some((record) => record.meta.requiresAuth) &&
       !isLoggedIn.value
     ) {

@@ -1,6 +1,6 @@
 import { useUsersStore } from './../stores/users-store';
 import IUsers from 'src/interfaces/IUser';
-import { api } from 'src/boot/keycloak';
+import { api } from 'src/boot/axios';
 
 export default class Users implements IUsers {
   id: string;
@@ -35,7 +35,7 @@ export default class Users implements IUsers {
         this.provider =
         this.orginizationName =
         this.orginizationSector =
-          '';
+        '';
       this.created = new Date();
     }
   }

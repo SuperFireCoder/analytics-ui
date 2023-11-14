@@ -27,3 +27,8 @@
  *   }
  * }
  */
+// const { contextBridge } = require('electron')
+
+// contextBridge.exposeInMainWorld('myAPI', {
+//   loadPreferences: () => ipcRenderer.invoke('myAPI:load-prefs')
+// })

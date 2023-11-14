@@ -22,21 +22,45 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '',
+        path: '/',
         component: () => import('pages/IndexPage.vue'),
+        meta: {
+          requiresAuth: true,
+        },
       },
     ],
   },
   {
-    path: '/users',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     meta: {
       requiresAuth: true,
     },
     children: [
       {
-        path: '',
+        name: 'platform-users',
+        path: '/users',
         component: () => import('pages/users/PlatformUsers.vue'),
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
+  {
+    path: '/',
+    component: () => import('layouts/MainLayout.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        name: 'experiments',
+        path: '/experiments',
+        component: () => import('pages/experiments/IndexPage.vue'),
+        meta: {
+          requiresAuth: true,
+        },
       },
     ],
   },

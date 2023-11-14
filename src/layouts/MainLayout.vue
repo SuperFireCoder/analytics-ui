@@ -6,8 +6,8 @@
 
         <q-toolbar-title>Analytics Dashboard </q-toolbar-title>
         <q-space />
-        <q-btn v-if="!$keycloak.authenticated" outline label="Login" @click="$keycloak.login" />
-        <q-btn v-if="$keycloak.authenticated" outline label="Logout" @click="$keycloak.logoutFn" />
+        <!-- <q-btn v-if="!$keycloak.authenticated" outline label="Login" @click="$keycloak.login" />
+        <q-btn v-if="$keycloak.authenticated" outline label="Logout" @click="$keycloak.logoutFn" /> -->
       </q-toolbar>
     </q-header>
 
@@ -33,24 +33,24 @@ import EssentialLink, {
 } from 'components/EssentialLink.vue';
 
 const essentialLinks: EssentialLinkProps[] = [
-  // {
-  //   title: 'Overview',
-  //   caption: 'Overview of the platform with important metrics',
-  //   icon: 'fas fa-home',
-  //   link: 'https://quasar.dev',
-  // },
   {
-    title: 'Users',
-    caption: 'Analytics regarding users of the platform',
+    title: 'Dashboard',
+    caption: 'Summary of the analytics dashboard',
+    icon: 'fas fa-home',
+    link: '/',
+  },
+  {
+    title: 'Users & Usage',
+    caption: 'Users and Usage analytics',
     icon: 'fas fa-users',
     link: 'users',
   },
-  // {
-  //   title: 'Experiments',
-  //   caption: 'Detailed usage analytics for experiments',
-  //   icon: 'fas fa-flask',
-  //   link: 'https://chat.quasar.dev',
-  // },
+  {
+    title: 'Experiments',
+    caption: 'Detailed usage analytics for experiments',
+    icon: 'fas fa-flask',
+    link: 'experiments',
+  },
   // {
   //   title: 'Algorithm',
   //   caption: 'Detailed usage analytics for algorithms',

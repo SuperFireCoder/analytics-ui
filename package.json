@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@dsb-norge/vue-keycloak-js": "^2.2.0",
+    "@quasar/cli": "^2.3.0",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "echarts": "^5.4.1",
@@ -28,6 +29,8 @@
     "@typescript-eslint/parser": "^5.53.0",
     "autoprefixer": "^10.4.2",
     "dotenv": "^16.0.3",
+    "electron": "^27.0.4",
+    "electron-packager": "^15.2.0",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",

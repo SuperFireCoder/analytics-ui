@@ -13,12 +13,63 @@
           <UserSignUpActivity />
         </q-tab-panel>
 
-        <q-tab-panel name="demographics" style="height: 50vh">
-          <UserDemographics />
+        <q-tab-panel name="demographics" class="q-gutter-y-lg">
+          
+          <div class="row" style="height: 50vh">
+            <UserDemographics class="col" />
+          </div>
+          
+
+            <div class="row">
+              <div class="col">
+              <q-markup-table separator="horizontal" flat bordered>
+                <thead>
+                  <tr class="bg-grey-9 text-white text-subtitle2">
+                    <th class="text-left ">Sector</th>
+                    <th class="text-center">Breakdown</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="userBySector,name in allUsersBySector" :key="name">
+                    <td class="text-center bg-grey-1">{{ name }}</td>
+                    <td class="text-left">
+                      <q-markup-table bordered flat>
+                <thead>
+                  <tr>
+                    <th class="text-center">Sector</th>
+                    <th class="text-center">Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="user in userBySector" :key="user">
+                    <td class="text-left">{{ user.name}}</td>
+                    <td class="text-left">{{ user.value }}</td>
+                    
+                  </tr>
+                  </tbody>
+              </q-markup-table></td>
+                    
+                  </tr>
+                  </tbody>
+              </q-markup-table>
+            </div>
+        
+          </div>
+          
         </q-tab-panel>
 
-        <q-tab-panel name="platActivity" style="height: 50vh">
-          <PlatformActivity />
+        <q-tab-panel name="platActivity" >
+          <div class="row" style="height: 50vh">
+            <PlatformActivity />
+          </div>
+          <div class="text-subtitle">
+            NOTE: This graph represents individual KeyCloak requests over the 
+            period of time. With implementation of our microservices architecture 
+            actions on the platform frequently require multiple requests to the
+            KeyCloak server. This graph does not represent the number of actions
+            taken on the platform.
+
+          </div>
         </q-tab-panel>
         <q-tab-panel name="appActivity" style="height: 70vh">
           <ApplicationUsage />
@@ -47,11 +98,17 @@
   </q-splitter>
 </template>
 <script setup lang="ts">
+
 import { ref } from 'vue';
 import UserSignUpActivity from './UserSignUpActivity.vue';
 import PlatformActivity from './PlatformActivity.vue';
 import UserDemographics from './UserDemographics.vue';
 import ApplicationUsage from './ApplicationUsage.vue';
+import { useUsersStore } from 'src/stores/users-store';
+import { storeToRefs } from 'pinia';
+
+const userStore = useUsersStore();
+const { allUsersBySector } = storeToRefs(userStore);
 
 const splitterModel = ref(80);
 const tab = ref('growth');

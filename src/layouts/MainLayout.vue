@@ -6,6 +6,7 @@
 
         <q-toolbar-title>Analytics Dashboard </q-toolbar-title>
         <q-space />
+        <span>version 1.0.1</span>
         <!-- <q-btn v-if="!$keycloak.authenticated" outline label="Login" @click="$keycloak.login" />
         <q-btn v-if="$keycloak.authenticated" outline label="Logout" @click="$keycloak.logoutFn" /> -->
       </q-toolbar>
@@ -13,7 +14,6 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list class="q-pt-md">
-
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
@@ -46,7 +46,7 @@ const essentialLinks: EssentialLinkProps[] = [
     link: 'users',
   },
   {
-    title: 'Experiments',
+    title: 'Experiments & Algorithms',
     caption: 'Detailed usage analytics for experiments',
     icon: 'fas fa-flask',
     link: 'experiments',

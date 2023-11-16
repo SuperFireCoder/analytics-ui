@@ -18,7 +18,8 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     // Add your API key header here if needed
-    // 'x-api-key': 'your_api_key_here',
+    
+    'Authorization': 'key e5f39acc-5a11-40ee-9c45-b1d3a9ff476f',
   },
 });
 

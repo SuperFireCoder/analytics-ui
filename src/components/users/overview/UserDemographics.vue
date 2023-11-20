@@ -49,6 +49,10 @@ const userGroups = computed(() => {
 });
 
 const option = ref({
+  title: {
+    text: 'User Demographics',
+    subtext: 'Users grouped by their sector and orginisation'
+  },
   silent: false,
   series: {
     type: 'sunburst',

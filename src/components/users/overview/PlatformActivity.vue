@@ -38,6 +38,10 @@ const { userLoginActivity } = storeToRefs(userStore);
 /* Wanted this calc for backend but pandas is not behaving. */
 
 const option = ref({
+  title: {
+    text: 'Platform Activity',
+    subtext: 'Total number of KeyCloak requests per months made by users'
+  },
   tooltip: {
     trigger: 'axis',
     axisPointer: {

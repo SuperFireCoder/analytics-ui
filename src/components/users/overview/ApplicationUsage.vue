@@ -52,6 +52,10 @@ const userGroups = computed(() => {
 });
 
 const option = ref({
+  title: {
+    text: 'Overall application usage',
+    subtext: 'Identified by the number of requests logged as keycloak activity'
+  },
   legend: {
     top: 'bottom',
   },

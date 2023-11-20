@@ -62,15 +62,15 @@ onMounted(async () => {
 
     </div>
     <div class="row">
-        <div class="col">
-          <div class="text-h5">
-          <q-icon name="fas fa-flask"/>  Experiments
-          </div>
-          <div class="text-caption text-grey-8">
-            Following table illustrates the Experiments(JobRequests) made by EcoCommons Users
-          </div>
+      <div class="col">
+        <div class="text-h5">
+          <q-icon name="fas fa-flask" /> Experiments
+        </div>
+        <div class="text-caption text-grey-8">
+          Following table illustrates the Experiments(JobRequests) made by EcoCommons Users
         </div>
       </div>
+    </div>
     <q-markup-table>
       <thead>
         <tr>
@@ -104,60 +104,60 @@ onMounted(async () => {
           </td>
         </tr>
       </tbody>
-      
+
     </q-markup-table>
     <div class="row">
-        <div class="col">
-          <div class="text-h5">
-          <q-icon name="fab fa-uncharted"/>  Algorithms
-          </div>
-          <div class="text-caption text-grey-8">
-            Following are the algorithms (Jobs) along with status and frequency of usage
-          </div>
+      <div class="col">
+        <div class="text-h5">
+          <q-icon name="fab fa-uncharted" /> Algorithms
+        </div>
+        <div class="text-caption text-grey-8">
+          Following are the algorithms (Jobs) along with status and frequency of usage
         </div>
       </div>
-        <!-- Should have used components but i am heck lazy atm been woprking ont his since 4 am -->
-        <q-markup-table>
-          <thead>
-            <tr>
-              <th class="text-bold bg-grey-9 text-grey-2 text-left">Algorithm</th>
-              <th class="text-bold bg-grey-9 text-grey-2 text-center">Created</th>
-              <th class="text-bold bg-grey-9 text-grey-2 text-center">In Progress</th>
-              <th class="text-bold bg-grey-9 text-grey-2 text-center">Failed</th>
-              <th class="text-bold bg-grey-9 text-grey-2 text-center">Completed</th>
-              <th class="text-bold bg-grey-9 text-grey-2 text-center ">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(algoDetails, algoName) in experimentSummary?.algorithmsByTypeStatus[AlgorithmSourceType.EC]"
-              :key="algoName">
-              <td class="text-left text-bold">
-                {{ algoName }}
-              </td>
-              <td class="text-center">
-                {{ algoDetails[ExperimentStatus.CREATED] }}
-              </td>
-              <td class="text-center">
-                {{ algoDetails[ExperimentStatus.IN_PROGRESS] }}
-              </td>
-              <td class="text-center">
-                {{ algoDetails[ExperimentStatus.FAILED] }}
-              </td>
-              <td class="text-center">
-                {{ algoDetails[ExperimentStatus.COMPLETED] }}
-              </td>
-              <td class="text-center text-bold bg-grey-3">
-                {{ Number(algoDetails[ExperimentStatus.CREATED] ?? 0) +
-                  Number(algoDetails[ExperimentStatus.IN_PROGRESS] ?? 0) +
-                  Number(algoDetails[ExperimentStatus.FAILED] ?? 0) +
-                  Number(algoDetails[ExperimentStatus.COMPLETED] ?? 0) }}
-              </td>
+    </div>
+    <!-- Should have used components but i am heck lazy atm been woprking ont his since 4 am -->
+    <q-markup-table>
+      <thead>
+        <tr>
+          <th class="text-bold bg-grey-9 text-grey-2 text-left">Algorithm</th>
+          <th class="text-bold bg-grey-9 text-grey-2 text-center">Created</th>
+          <th class="text-bold bg-grey-9 text-grey-2 text-center">In Progress</th>
+          <th class="text-bold bg-grey-9 text-grey-2 text-center">Failed</th>
+          <th class="text-bold bg-grey-9 text-grey-2 text-center">Completed</th>
+          <th class="text-bold bg-grey-9 text-grey-2 text-center ">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(algoDetails, algoName) in experimentSummary?.algorithmsByTypeStatus[AlgorithmSourceType.EC]"
+          :key="algoName">
+          <td class="text-left text-bold">
+            {{ algoName }}
+          </td>
+          <td class="text-center">
+            {{ algoDetails[ExperimentStatus.CREATED] }}
+          </td>
+          <td class="text-center">
+            {{ algoDetails[ExperimentStatus.IN_PROGRESS] }}
+          </td>
+          <td class="text-center">
+            {{ algoDetails[ExperimentStatus.FAILED] }}
+          </td>
+          <td class="text-center">
+            {{ algoDetails[ExperimentStatus.COMPLETED] }}
+          </td>
+          <td class="text-center text-bold bg-grey-3">
+            {{ Number(algoDetails[ExperimentStatus.CREATED] ?? 0) +
+              Number(algoDetails[ExperimentStatus.IN_PROGRESS] ?? 0) +
+              Number(algoDetails[ExperimentStatus.FAILED] ?? 0) +
+              Number(algoDetails[ExperimentStatus.COMPLETED] ?? 0) }}
+          </td>
 
 
-            </tr>
-          </tbody>
-        </q-markup-table>
-    
+        </tr>
+      </tbody>
+    </q-markup-table>
+
   </q-page>
 </template>
 

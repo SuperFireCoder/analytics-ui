@@ -22,4 +22,5 @@ export interface IUserDataResponse {
   signup: ISignUpActivity;
   activity: ILoginActivity;
   appActivity: IAppActivity[];
+  userActivityThreeMonths: IAppActivity[];
 }
